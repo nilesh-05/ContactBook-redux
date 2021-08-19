@@ -236,12 +236,23 @@ const contactState = {
 	],
 };
 
+//actions
+export const addContact = (contact) => {
+	return {
+		type: "CREATE_CONTACT",
+		payload: contact,
+	};
+};
+
 const contactReducer = (state = contactState, action) => {
 	switch (action.type) {
+		case "CREATE_CONTACT":
+			return { ...state, contacts: [action.payload, ...state.contacts] };
 		default:
 			return state;
 	}
 };
 
 const store = createStore(contactReducer, composeWithDevTools());
+
 export default store;
