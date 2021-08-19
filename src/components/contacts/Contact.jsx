@@ -17,6 +17,14 @@ const Contact = ({ contact }) => {
 			</td>
 			<td>{phone}</td>
 			<td>{email}</td>
+			<td className="actions">
+				<a href="#">
+					<span className="material-icons mr-2">edit</span>
+				</a>
+				<a href="#">
+					<span className="material-icons text-danger">remove_circle</span>
+				</a>
+			</td>
 		</tr>
 	);
 };
