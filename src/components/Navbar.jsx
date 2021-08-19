@@ -8,7 +8,9 @@ const Navbar = () => {
 					Contacts
 				</a>
 				<div>
-					<a href="#" className="btn btn-light ml-auto"></a>
+					<a href="#" className="btn btn-light ml-auto">
+						Create Contact
+					</a>
 				</div>
 			</div>
 		</nav>
