@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NewContact from "./components/contacts/NewContact";
+import EditContact from "./components/contacts/EditContact";
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 							<Switch>
 								<Route exact path="/" component={Contacts} />
 								<Route exact path="/create" component={NewContact} />
+								<Route exact path="/edit/:id" component={EditContact} />
 							</Switch>
 						</div>
 					</div>
