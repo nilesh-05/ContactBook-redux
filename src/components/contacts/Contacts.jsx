@@ -1,9 +1,25 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	clearAllContacts,
+	selectAllContacts,
+} from "../../actions/contactAction";
 import Contact from "./Contact";
 
 const Contacts = () => {
+	const [selectAll, setSelectAll] = useState(false);
 	const contacts = useSelector((state) => state.firstReducer.contacts);
+	let dispatch = useDispatch();
+
+	useEffect(() => {
+		if (selectAll) {
+			dispatch(selectAllContacts(contacts.map((contact) => contact.id)));
+		} else {
+			dispatch(clearAllContacts());
+		}
+	}, [selectAll]);
 	return (
 		<div>
 			<table className="table shadow table-light">
@@ -11,8 +27,17 @@ const Contacts = () => {
 					<tr>
 						<th scope="col">
 							<div className="custom-control custom-checkbox">
-								<input type="checkbox" className="custom-control-input" />
-								<label className="custom-control-label"></label>
+								<input
+									type="checkbox"
+									className="custom-control-input"
+									id="selectAll"
+									value={selectAll}
+									onClick={() => setSelectAll(!selectAll)}
+								/>
+								<label
+									className="custom-control-label"
+									htmlFor="selectAll"
+								></label>
 							</div>
 						</th>
 						<th>Name</th>
@@ -23,7 +48,7 @@ const Contacts = () => {
 				</thead>
 				<tbody>
 					{contacts.map((contact) => (
-						<Contact contact={contact} key={contact.id} />
+						<Contact contact={contact} key={contact.id} selectAll={selectAll} />
 					))}
 				</tbody>
 			</table>

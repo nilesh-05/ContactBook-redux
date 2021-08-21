@@ -1,8 +1,10 @@
 /* eslint-disable eqeqeq */
 import {
+	CLEAR_CONTACT,
 	CREATE_CONTACT,
 	DELETE_CONTACT,
 	GET_CONTACT,
+	SELECT_CONTACT,
 	UPDATE_CONTACT,
 } from "../constants/types";
 
@@ -240,6 +242,7 @@ const contactState = {
 		},
 	],
 	singleContact: null,
+	selectedContacts: [],
 };
 
 export const contactReducer = (state = contactState, action) => {
@@ -269,6 +272,18 @@ export const contactReducer = (state = contactState, action) => {
 				contacts: state.contacts.filter(
 					(contact) => contact.id != action.payload,
 				),
+			};
+
+		case SELECT_CONTACT:
+			return {
+				...state,
+				selectedContacts: action.payload,
+			};
+
+		case CLEAR_CONTACT:
+			return {
+				...state,
+				selectedContacts: [],
 			};
 		default:
 			return state;
