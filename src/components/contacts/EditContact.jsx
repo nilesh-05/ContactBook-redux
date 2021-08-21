@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addContact, getContact } from "../../actions/contactAction";
-import shortid from "shortid";
-import { useHistory, useParams } from "react-router-dom";
+import { getContact } from "../../actions/contactAction";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 const EditContact = () => {
@@ -17,7 +17,7 @@ const EditContact = () => {
 	useEffect(() => {
 		if (contact != null) {
 			setName(contact.name);
-			setMail(contact.mail);
+			setMail(contact.email);
 			setPhone(contact.phone);
 		}
 		dispatch(getContact(id));
@@ -41,7 +41,7 @@ const EditContact = () => {
 						<input
 							value={phone}
 							onChange={(e) => setPhone(e.target.value)}
-							type="number"
+							type="text"
 							className="form-control"
 							placeholder="Enter your Phone Number"
 						/>

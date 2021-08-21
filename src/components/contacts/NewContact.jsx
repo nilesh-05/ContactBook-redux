@@ -9,16 +9,16 @@ const NewContact = () => {
 	let history = useHistory();
 	const [name, setName] = useState("");
 	const [phone, setPhone] = useState("");
-	const [mail, setMail] = useState("");
+	const [email, setEmail] = useState("");
 	const dispatch = useDispatch();
 
 	const createContact = (e) => {
 		e.preventDefault();
 		const new_contact = {
 			id: shortid.generate(),
-			name: name,
-			phone: phone,
-			mail: mail,
+			name,
+			phone,
+			email,
 		};
 		dispatch(addContact(new_contact));
 		history.push("/");
@@ -49,8 +49,8 @@ const NewContact = () => {
 					</div>
 					<div className="form-group">
 						<input
-							value={mail}
-							onChange={(e) => setMail(e.target.value)}
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
 							type="email"
 							className="form-control"
 							placeholder="Enter your Email"
