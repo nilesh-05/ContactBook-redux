@@ -3,11 +3,12 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getContact, updateContact } from "../../actions/contactAction";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 const EditContact = () => {
 	let { id } = useParams();
+	let history = useHistory();
 	const [name, setName] = useState("");
 	const [phone, setPhone] = useState("");
 	const [email, setMail] = useState("");
@@ -27,6 +28,7 @@ const EditContact = () => {
 		e.preventDefault();
 		const updatedContact = Object.assign(contact, { name, phone, email });
 		dispatch(updateContact(updatedContact));
+		history.push("/");
 	};
 
 	return (

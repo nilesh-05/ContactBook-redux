@@ -1,6 +1,7 @@
 /* eslint-disable eqeqeq */
 import {
 	CREATE_CONTACT,
+	DELETE_CONTACT,
 	GET_CONTACT,
 	UPDATE_CONTACT,
 } from "../constants/types";
@@ -259,6 +260,14 @@ export const contactReducer = (state = contactState, action) => {
 				...state,
 				contacts: state.contacts.map((contact) =>
 					contact.id == action.payload.id ? action.payload : contact,
+				),
+			};
+
+		case DELETE_CONTACT:
+			return {
+				...state,
+				contacts: state.contacts.filter(
+					(contact) => contact.id != action.payload,
 				),
 			};
 		default:
