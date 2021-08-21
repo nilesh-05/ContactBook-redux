@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	clearAllContacts,
+	deleteSelectedContacts,
 	selectAllContacts,
 } from "../../actions/contactAction";
 import Contact from "./Contact";
@@ -12,6 +13,9 @@ const Contacts = () => {
 	const [selectAll, setSelectAll] = useState(false);
 	const contacts = useSelector((state) => state.firstReducer.contacts);
 	let dispatch = useDispatch();
+	const selectedContacts = useSelector(
+		(state) => state.firstReducer.selectedContacts,
+	);
 
 	useEffect(() => {
 		if (selectAll) {
@@ -22,6 +26,14 @@ const Contacts = () => {
 	}, [selectAll]);
 	return (
 		<div>
+			{selectedContacts.length > 0 ? (
+				<button
+					className="btn btn-danger mb-3"
+					onClick={() => dispatch(deleteSelectedContacts())}
+				>
+					Delete All
+				</button>
+			) : null}
 			<table className="table shadow table-light">
 				<thead>
 					<tr>

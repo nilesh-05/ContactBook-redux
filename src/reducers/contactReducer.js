@@ -3,6 +3,7 @@ import {
 	CLEAR_CONTACT,
 	CREATE_CONTACT,
 	DELETE_CONTACT,
+	DELETE_SELECTED,
 	GET_CONTACT,
 	SELECT_CONTACT,
 	UPDATE_CONTACT,
@@ -284,6 +285,12 @@ export const contactReducer = (state = contactState, action) => {
 			return {
 				...state,
 				selectedContacts: [],
+			};
+
+		case DELETE_SELECTED:
+			return {
+				...state,
+				contacts: [],
 			};
 		default:
 			return state;
