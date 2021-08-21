@@ -2,7 +2,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getContact } from "../../actions/contactAction";
+import { getContact, updateContact } from "../../actions/contactAction";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -10,7 +10,7 @@ const EditContact = () => {
 	let { id } = useParams();
 	const [name, setName] = useState("");
 	const [phone, setPhone] = useState("");
-	const [mail, setMail] = useState("");
+	const [email, setMail] = useState("");
 	const dispatch = useDispatch();
 	const contact = useSelector((state) => state.firstReducer.singleContact);
 
@@ -23,11 +23,17 @@ const EditContact = () => {
 		dispatch(getContact(id));
 	}, [contact]);
 
+	const onUpdateContact = (e) => {
+		e.preventDefault();
+		const updatedContact = Object.assign(contact, { name, phone, email });
+		dispatch(updateContact(updatedContact));
+	};
+
 	return (
 		<div className="card border-0 shadow">
 			<div className="card-header">Add a Contact</div>
 			<div className="card-body">
-				<form>
+				<form onSubmit={(e) => onUpdateContact(e)}>
 					<div className="form-group">
 						<input
 							value={name}
@@ -48,7 +54,7 @@ const EditContact = () => {
 					</div>
 					<div className="form-group">
 						<input
-							value={mail}
+							value={email}
 							onChange={(e) => setMail(e.target.value)}
 							type="email"
 							className="form-control"

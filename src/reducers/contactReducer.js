@@ -1,4 +1,9 @@
-import { CREATE_CONTACT, GET_CONTACT } from "../constants/types";
+/* eslint-disable eqeqeq */
+import {
+	CREATE_CONTACT,
+	GET_CONTACT,
+	UPDATE_CONTACT,
+} from "../constants/types";
 
 const contactState = {
 	contacts: [
@@ -240,6 +245,7 @@ export const contactReducer = (state = contactState, action) => {
 	switch (action.type) {
 		case CREATE_CONTACT:
 			return { ...state, contacts: [action.payload, ...state.contacts] };
+
 		case GET_CONTACT:
 			let arr = state.contacts.filter(
 				(contact) => contact.id == action.payload,
@@ -247,6 +253,14 @@ export const contactReducer = (state = contactState, action) => {
 			arr = arr.values();
 			for (let val of arr) arr = val;
 			return { ...state, singleContact: arr };
+
+		case UPDATE_CONTACT:
+			return {
+				...state,
+				contacts: state.contacts.map((contact) =>
+					contact.id == action.payload.id ? action.payload : contact,
+				),
+			};
 		default:
 			return state;
 	}
